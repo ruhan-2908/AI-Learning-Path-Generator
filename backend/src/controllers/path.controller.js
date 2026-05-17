@@ -14,7 +14,7 @@ const normalizeModules = (modules = []) => {
     return modules.map((module, index) => {
         let rawResources = module?.resources;
 
-        // Aggressively clean resources if it's a malformed string or a string inside an array
+   
         const cleanString = (str) => {
             if (typeof str !== 'string') return str;
             // Remove JavaScript concatenations like ' + \n '
@@ -78,7 +78,6 @@ export const createPath = async (req, res) => {
     try {
         const userId = req.user.id;
 
-        console.log("Generating path for user:", userId);
         // Fetch complete user profile from database
         const user = await User.findById(userId);
         if (!user) {
@@ -114,7 +113,6 @@ export const createPath = async (req, res) => {
             timeline: req.body.timeline || 90, // Default 90 days
         };
 
-        console.log("Calling AI service with payload:", JSON.stringify(aiRequestPayload, null, 2));
         // Call FastAPI AI Service to generate learning path
         let aiResponse;
         try {
